@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Box, Button, Image, Text, VStack, Heading, SimpleGrid } from "@chakra-ui/react";
-import axios from "axios";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 const Shop = () => {
