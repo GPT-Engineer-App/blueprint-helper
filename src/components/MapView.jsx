@@ -1,39 +1,29 @@
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import { useState, useEffect } from 'react';
-import { Box, Select, VStack, Heading } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
+import L from 'leaflet';
+
+// Fix for default icon issue with Leaflet
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
+  iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+});
 
 const MapView = ({ businesses }) => {
-  const [filteredBusinesses, setFilteredBusinesses] = useState(businesses);
-  const [filter, setFilter] = useState('');
-
-  useEffect(() => {
-    if (filter) {
-      setFilteredBusinesses(businesses.filter(business => business.category === filter));
-    } else {
-      setFilteredBusinesses(businesses);
-    }
-  }, [filter, businesses]);
-
   return (
-    <Box>
-      <Heading mb={4}>Map View</Heading>
-      <Select placeholder="Filter by Category" onChange={(e) => setFilter(e.target.value)} mb={4}>
-        <option value="restaurant">Restaurant</option>
-        <option value="shop">Shop</option>
-        <option value="service">Service</option>
-      </Select>
-      <MapContainer center={[51.505, -0.09]} zoom={13} style={{ height: "500px", width: "100%" }}>
+    <Box height="500px" width="100%">
+      <MapContainer center={[51.505, -0.09]} zoom={13} style={{ height: '100%', width: '100%' }}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
-        {filteredBusinesses.map((business, index) => (
+        {businesses.map((business, index) => (
           <Marker key={index} position={[business.latitude, business.longitude]}>
             <Popup>
               <strong>{business.name}</strong><br />
-              {business.description}<br />
-              <a href={`mailto:${business.contact}`}>{business.contact}</a>
+              {business.description}
             </Popup>
           </Marker>
         ))}

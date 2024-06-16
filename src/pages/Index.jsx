@@ -1,4 +1,5 @@
 import { Container, Text, VStack, Box, Heading, SimpleGrid, Flex, Spacer, Button, Image, Input, Textarea, Select } from "@chakra-ui/react";
+import MapView from '../components/MapView';
 import { useState } from "react";
 import MapView from "../components/MapView.jsx";
 
