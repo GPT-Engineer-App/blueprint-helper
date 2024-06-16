@@ -1,6 +1,7 @@
 import { Container, Text, VStack, Box, Heading, SimpleGrid, Flex, Spacer, Button, Image, Input, Textarea, Select } from "@chakra-ui/react";
 import { useState } from "react";
 import MapView from "../components/MapView.jsx";
+import PayPalButton from '../components/PayPalButton.jsx';
 
 const Index = () => {
   const [businesses, setBusinesses] = useState([]);
@@ -32,6 +33,16 @@ const Index = () => {
       latitude: "",
       longitude: ""
     });
+  };
+
+  const handlePaymentSuccess = (details) => {
+    console.log('Payment successful!', details);
+    // Handle post-payment success logic here
+  };
+
+  const handlePaymentError = (err) => {
+    console.error('Payment error!', err);
+    // Handle payment error logic here
   };
 
   return (
@@ -67,6 +78,7 @@ const Index = () => {
             <Text mt={4}>{business.description}</Text>
             <Text mt={4}><b>Contact:</b> {business.contact}</Text>
             <Text mt={4}><b>Category:</b> {business.category}</Text>
+            <PayPalButton amount="10.00" onSuccess={handlePaymentSuccess} onError={handlePaymentError} />
           </Box>
         ))}
       </VStack>
