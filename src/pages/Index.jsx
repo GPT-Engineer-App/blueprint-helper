@@ -1,5 +1,6 @@
-import { Container, Text, VStack, Box, Heading, SimpleGrid, Flex, Spacer, Button, Image, Input, Textarea, Select } from "@chakra-ui/react";
+import { Container, Text, VStack, Box, Heading, Flex, Spacer, Button, Image, Input, Textarea, Select } from "@chakra-ui/react";
 import { useState } from "react";
+import MapView from '../components/MapView';
 
 const Index = () => {
   const [businesses, setBusinesses] = useState([]);
@@ -9,7 +10,9 @@ const Index = () => {
     name: "",
     description: "",
     contact: "",
-    category: ""
+    category: "",
+    latitude: 0,
+    longitude: 0
   });
 
   const handleInputChange = (e) => {
@@ -25,7 +28,9 @@ const Index = () => {
       name: "",
       description: "",
       contact: "",
-      category: ""
+      category: "",
+      latitude: 0,
+      longitude: 0
     });
   };
 
@@ -44,8 +49,12 @@ const Index = () => {
             <option value="shop">Shop</option>
             <option value="service">Service</option>
           </Select>
+          <Input placeholder="Latitude" name="latitude" value={newBusiness.latitude} onChange={handleInputChange} mt={4} />
+          <Input placeholder="Longitude" name="longitude" value={newBusiness.longitude} onChange={handleInputChange} mt={4} />
           <Button onClick={handleAddBusiness} mt={4}>Add Business</Button>
         </Box>
+
+        <MapView businesses={businesses} />
 
         {businesses.map((business, index) => (
           <Box key={index} p={5} shadow="md" borderWidth="1px">
