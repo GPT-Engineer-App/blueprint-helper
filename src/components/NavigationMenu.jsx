@@ -5,7 +5,7 @@ const NavigationMenu = () => {
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
-    <Box bg="gray.800" px={4} py={2}>
+    <Box bg={colorMode === "light" ? "gray.800" : "gray.200"} px={4} py={2}>
       <Flex h={16} alignItems="center" justifyContent="space-between">
         <Box>
           <NavLink to="/" exact>
