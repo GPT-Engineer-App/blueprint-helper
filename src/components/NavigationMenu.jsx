@@ -1,7 +1,9 @@
-import { Box, Flex, Link, Button } from "@chakra-ui/react";
+import { Box, Flex, Link, Button, useColorMode } from "@chakra-ui/react";
 import { NavLink } from "react-router-dom";
 
 const NavigationMenu = () => {
+  const { colorMode, toggleColorMode } = useColorMode();
+
   return (
     <Box bg="gray.800" px={4} py={2}>
       <Flex h={16} alignItems="center" justifyContent="space-between">
@@ -18,6 +20,9 @@ const NavigationMenu = () => {
           </NavLink>
           {/* Add more navigation links as needed */}
         </Box>
+        <Button onClick={toggleColorMode}>
+          {colorMode === "light" ? "Dark Mode" : "Light Mode"}
+        </Button>
       </Flex>
     </Box>
   );
