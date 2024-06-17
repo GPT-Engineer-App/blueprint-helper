@@ -15,7 +15,7 @@ const darkTheme = extendTheme({
   colors: {
     text: {
       primary: "white",
-      secondary: "gray.400",
+      secondary: "gray.400", // Light grey color for secondary text
     },
   },
 });
