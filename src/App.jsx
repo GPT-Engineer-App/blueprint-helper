@@ -9,7 +9,7 @@ function App() {
       <NavigationMenu /> {/* Add the NavigationMenu component here */}
       <Routes>
         <Route exact path="/" element={<Index />} />
-      <Route path="/shop" element={<Shop />} />
+        <Route path="/shop" element={<Shop />} />
       </Routes>
     </Router>
   );
